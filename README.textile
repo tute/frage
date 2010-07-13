@@ -1,0 +1,11 @@
+h2. Survey plugin for CakePHP
+
+This plugin allows the creation of surveys, which can have many questions. Each
+question can be of type "yes/no", values 1 to 5, free text or with custom
+options.
+
+I'm currently actively developing it.
+
+h3. Currently relies on:
+
+* Inflection ('opcion' => 'opciones') (@bootstrap.php@)
