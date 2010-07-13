@@ -31,7 +31,8 @@ CREATE TABLE `fr_encuestas` (
 --
 
 INSERT INTO `fr_encuestas` (`id`, `nombre`) VALUES
-(1, 'About CakePHP plugins');
+(1, 'About CakePHP plugins'),
+(2, 'About frage plugin');
 
 -- --------------------------------------------------------
 
@@ -54,7 +55,9 @@ CREATE TABLE `fr_preguntas` (
 
 INSERT INTO `fr_preguntas` (`id`, `fr_encuesta_id`, `pregunta`, `tipo`) VALUES
 (1, 1, 'Do you use CakePHP plugins?', 1),
-(2, 1, 'How much?', 2);
+(2, 1, 'How much?', 2),
+(3, 1, 'Do you find them better than plain CakePHP? Why?', 3),
+(4, 2, 'Will you help me improving it?', 1);
 
 -- --------------------------------------------------------
 
@@ -76,7 +79,9 @@ CREATE TABLE `fr_opciones` (
 --
 
 INSERT INTO `fr_opciones` (`id`, `fr_pregunta_id`, `opcion`, `tipo`) VALUES
-(1, 0, 'Sí', 1), (2, 0, 'No', 1);
+(1, 0, 'Sí', 1), (2, 0, 'No', 1), -- Yes / No
+(3, 0, 1, 2), (4, 0, 2, 2), (5, 0, 3, 2), (6, 0, 4, 2), (7, 0, 5, 2),  -- 1 to 5
+(8, 0, 'FR_TEXT', 3); -- free text
 
 -- --------------------------------------------------------
 

@@ -15,7 +15,7 @@ class FunctionsHelper extends AppHelper {
 		return $abm;
 	}
 
-	function listar_preguntas($pregs) {
+	function listar_preguntas($pregs, $show_options = true) {
 		/* Load HTML helper */
 		App::import('Helper', 'Html');
 		$html = new HtmlHelper();
@@ -24,16 +24,26 @@ class FunctionsHelper extends AppHelper {
 			echo "\n    <ul>\n";
 			foreach ($pregs as $p) {
 				echo '      <li><a href="/frage/preguntas/edit/'.$p['id'].'">' . $p['pregunta'] . "</a> "
-				 . $this->abm($p['id'], 'preguntas') . "</li>\n";
+				 . $this->abm($p['id'], 'preguntas')
+				 . $this->show_options($p['tipo'], $p['id'])
+				 . "</li>\n";
 			}
 			echo '    </ul>';
 		}
 	}
 
-	function show_options($tipo) {
-		pr(ClassRegistry::init('Opcion')->find('all', array(
+	function show_options($tipo, $pid) {
+		$options = ClassRegistry::init('Opcion')->find('all', array(
 			'conditions' => array('Opcion.tipo' => $tipo)
-		)));
+		));
+		$opts = '';
+		foreach ($options as $opt) {
+			if ($tipo == 1 or $tipo == 2)
+				$opts .= "<label><input type=\"radio\" id=\"pr_$pid\" name=\"pr_$pid\" value=\"{$opt['Opcion']['id']}\"> {$opt['Opcion']['opcion']}</label> ";
+			if ($tipo == 3)
+				$opts .= "<label><input type=\"text\" id=\"pr_$pid\" name=\"pr_$pid\"></label> ";
+		}
+		return $opts;
 	}
 
 }
