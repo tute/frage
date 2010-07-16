@@ -16,7 +16,18 @@ class FunctionsHelper extends AppHelper {
 	}
 
 	function listar_preguntas($pregs, $show_options = true) {
-		/* Load HTML helper */
+		if (count($pregs) > 0) {
+			echo "\n    <ul>\n";
+			foreach ($pregs as $p) {
+				echo '      <li>' . $p['pregunta']
+				 . $this->show_options($p['tipo'], $p['id'])
+				 . "</li>\n";
+			}
+			echo '    </ul>';
+		}
+	}
+
+	function listar_preguntas_admin($pregs, $show_options = true) {
 		App::import('Helper', 'Html');
 		$html = new HtmlHelper();
 
@@ -36,14 +47,17 @@ class FunctionsHelper extends AppHelper {
 		$options = ClassRegistry::init('Opcion')->find('all', array(
 			'conditions' => array('Opcion.tipo' => $tipo)
 		));
-		$opts = '';
+		$opts = "<div>\n";
 		foreach ($options as $opt) {
-			if ($tipo == 1 or $tipo == 2)
-				$opts .= "<label><input type=\"radio\" id=\"pr_$pid\" name=\"pr_$pid\" value=\"{$opt['Opcion']['id']}\"> {$opt['Opcion']['opcion']}</label> ";
+			if ($tipo == 1 or $tipo == 2) {
+				$opts .= "<label><input type=\"hidden\" id=\"Encuesta{$pid}PreguntasVotoFrOpcionId\" name=\"data[$pid][PreguntasVoto][fr_opcion_id]\" value=\"{$opt['Opcion']['id']}\"></label> ";
+				$opts .= "<label><input type=\"radio\" id=\"Encuesta{$pid}PreguntasVotoValor\" name=\"data[$pid][PreguntasVoto][valor]\" value=\"{$opt['Opcion']['id']}\"> {$opt['Opcion']['opcion']}</label> ";
+			}
 			if ($tipo == 3)
-				$opts .= "<label><input type=\"text\" id=\"pr_$pid\" name=\"pr_$pid\"></label> ";
+				$opts .= "<label><input type=\"text\" id=\"Encuesta{$pid}PreguntasVotoValor\" name=\"data[$pid][PreguntasVoto][valor]\"></label> ";
 		}
-		return $opts;
+		$opts .= "<label><input type=\"hidden\" id=\"Encuesta{$pid}PreguntasVotoFrPreguntaId\" name=\"data[$pid][PreguntasVoto][fr_pregunta_id]\" value=\"$pid\"></label> ";
+		return $opts . "</div>\n";
 	}
 
 }

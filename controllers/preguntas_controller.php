@@ -7,6 +7,16 @@ class PreguntasController extends FrageAppController {
 		$this->set('preguntas', $this->paginate());
 	}
 
+	function completar($id) {
+		$u = $this->Auth->user();
+		foreach ($this->data as $k => $v) {
+			if (isset($this->data[$k]['PreguntasVoto'])) {
+				$this->data[$k]['PreguntasVoto']['usuario_id'] = $u['Usuario']['id'];
+			}
+		}
+		$this->Pregunta->PreguntasVoto->saveAll($this->data);
+	}
+
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid fr pregunta', true));

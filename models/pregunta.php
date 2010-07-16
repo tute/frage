@@ -4,6 +4,9 @@ class Pregunta extends AppModel {
 	var $useTable = 'fr_preguntas';
 	var $displayField = 'pregunta';
 	var $hasMany = array(
+		'PreguntasVoto' => array(
+			'className' => 'Frage.PreguntasVoto'
+		),
 		'Opcion' => array(
 			'className' => 'Frage.Opcion'
 		)
