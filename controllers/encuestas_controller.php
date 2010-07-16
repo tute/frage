@@ -8,6 +8,16 @@ class EncuestasController extends FrageAppController {
 		$this->set('encuestas', $this->paginate());
 	}
 
+	function resultados($id = null) {
+		if (!$id) {
+			$this->Session->setFlash(__('Invalid fr encuesta', true));
+			$this->redirect(array('action' => 'index'));
+		}
+		$this->Encuesta->recursive = 2;
+		$this->set('encuesta', $this->Encuesta->read(null, $id));
+		$this->set('opciones', $this->Encuesta->Pregunta->Opcion->find('all'));
+	}
+
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid fr encuesta', true));

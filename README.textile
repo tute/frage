@@ -14,3 +14,10 @@ h3. Possible type of questions:
 # Values 1 to 5
 # Free text
 # Options defined by administrator (developing)
+
+h3. Installation
+# Copy @frage@ folder to @/app/plugins/@
+# Import frage SQL file to your database.
+
+h3. To do:
+* ACL (only admins can edit).

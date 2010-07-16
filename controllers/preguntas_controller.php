@@ -15,6 +15,7 @@ class PreguntasController extends FrageAppController {
 			}
 		}
 		$this->Pregunta->PreguntasVoto->saveAll($this->data);
+		$this->redirect('/frage/encuestas/resultados/' . $id);
 	}
 
 	function view($id = null) {
