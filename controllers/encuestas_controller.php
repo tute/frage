@@ -15,7 +15,7 @@ class EncuestasController extends FrageAppController {
 		}
 		$this->Encuesta->recursive = 2;
 		$this->set('encuesta', $this->Encuesta->read(null, $id));
-		$this->set('opciones', $this->Encuesta->Pregunta->Opcion->find('all'));
+		$this->set('opciones', $this->Encuesta->Pregunta->Opcion->find('list'));
 	}
 
 	function view($id = null) {
