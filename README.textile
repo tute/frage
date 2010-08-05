@@ -30,4 +30,4 @@ h3. To do:
 * Siempre tiene que haber una respuesta seleccionada por default (o validar que
   usuario siempre seleccione alguna).
 * Sólo una vez por ip (y/o cookie)!
-* Editar preguntas en edición de encuestas.
+* Poder agregar preguntas al agregar encuesta.

@@ -30,7 +30,7 @@ class PreguntasController extends FrageAppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid fr pregunta', true));
+			$this->Session->setFlash(__('Invalid pregunta', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->set('pregunta', $this->Pregunta->read(null, $id));
@@ -40,10 +40,10 @@ class PreguntasController extends FrageAppController {
 		if (!empty($this->data)) {
 			$this->Pregunta->create();
 			if ($this->Pregunta->save($this->data)) {
-				$this->Session->setFlash(__('The fr pregunta has been saved', true));
+				$this->Session->setFlash(__('The pregunta has been saved', true));
 				$this->redirect(array('controller' => 'encuestas'));
 			} else {
-				$this->Session->setFlash(__('The fr pregunta could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The pregunta could not be saved. Please, try again.', true));
 			}
 		}
 		$this->set('frEncuestas', $this->Pregunta->Encuesta->find('list'));
@@ -51,15 +51,15 @@ class PreguntasController extends FrageAppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid fr pregunta', true));
+			$this->Session->setFlash(__('Invalid pregunta', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->Pregunta->save($this->data)) {
-				$this->Session->setFlash(__('The fr pregunta has been saved', true));
+				$this->Session->setFlash(__('The pregunta has been saved', true));
 				$this->redirect(array('controller' => 'encuestas'));
 			} else {
-				$this->Session->setFlash(__('The fr pregunta could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The pregunta could not be saved. Please, try again.', true));
 			}
 		}
 		if (empty($this->data)) {
@@ -70,14 +70,14 @@ class PreguntasController extends FrageAppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for fr pregunta', true));
+			$this->Session->setFlash(__('Invalid id for pregunta', true));
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->Pregunta->delete($id)) {
-			$this->Session->setFlash(__('Fr pregunta deleted', true));
+			$this->Session->setFlash(__('Pregunta deleted', true));
 			$this->redirect(array('controller' => 'encuestas'));
 		}
-		$this->Session->setFlash(__('Fr pregunta was not deleted', true));
+		$this->Session->setFlash(__('Pregunta was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
 }

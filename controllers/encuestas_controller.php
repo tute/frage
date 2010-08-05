@@ -56,7 +56,7 @@ class EncuestasController extends FrageAppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
-			if ($this->Encuesta->save($this->data)) {
+			if ($this->Encuesta->saveAll($this->data)) {
 				$this->Session->setFlash(__('The survey has been saved', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
