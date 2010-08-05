@@ -1,6 +1,12 @@
 <?php
 class PreguntasController extends FrageAppController {
 	var $name = 'Preguntas';
+	var $helpers = array('Html', 'Form');
+
+	function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow('completar');
+	}
 
 	function index() {
 		$this->Pregunta->recursive = 0;
@@ -9,6 +15,10 @@ class PreguntasController extends FrageAppController {
 
 	function completar($id) {
 		$u = $this->Auth->user();
+		if (!is_array($u)) {
+			$this->Session->setFlash('Debe estar logueado para completar encuestas.');
+			$this->redirect('/usuarios/login');
+		}
 		foreach ($this->data as $k => $v) {
 			if (isset($this->data[$k]['PreguntasVoto'])) {
 				$this->data[$k]['PreguntasVoto']['usuario_id'] = $u['Usuario']['id'];

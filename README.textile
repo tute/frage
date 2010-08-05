@@ -18,6 +18,16 @@ h3. Possible type of questions:
 h3. Installation
 # Copy @frage@ folder to @/app/plugins/@
 # Import frage SQL file to your database.
+# Add routes to your routes.php file:
+@Router::connect(
+	'/survey/:id',
+	array('plugin' => 'frage', 'controller' => 'encuestas', 'action' => 'view'),
+	array('id' => '[0-9]+')
+);@
 
 h3. To do:
-* ACL (only admins can edit).
+* Administrar preguntas.
+* Siempre tiene que haber una respuesta seleccionada por default (o validar que
+  usuario siempre seleccione alguna).
+* Sólo una vez por ip (y/o cookie)!
+* Editar preguntas en edición de encuestas.

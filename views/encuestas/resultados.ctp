@@ -2,12 +2,14 @@
 <script type="text/javascript" src="/frage/js/jquery.flot.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	<?php
+<?php
 	foreach ($encuesta['Pregunta'] as $frage) {
+	if ($frage['tipo'] != 3) {
 	$results = $res = array();
 	foreach ($frage['PreguntasVoto'] as $voto) {
 		$results[$voto['valor']][] = $voto;
 	}
+	ksort($results);
 	foreach ($results as $v => $vs) {
 		if (isset($opciones[$v]))
 			$v = $opciones[$v];
@@ -36,7 +38,8 @@ $(document).ready(function() {
 	);
 	<?
 	echo "\n";
-	}
+	} // Not text type
+	} // foreach frage
 	?>
 });
 </script>
@@ -46,7 +49,15 @@ $(document).ready(function() {
 <?
 foreach ($encuesta['Pregunta'] as $frage) {
 	echo "<h3>{$frage['pregunta']}</h3>";
-	echo '<div id="frage_'.$frage['id'].'" style="width:300px;height:200px;"></div>';
+	if ($frage['tipo'] == 3) {
+		echo "<ul>\n";
+		foreach ($frage['PreguntasVoto'] as $voto) {
+			echo "  <li>{$voto['valor']}</li>\n";
+		}
+		echo "</ul>\n";
+	} else {
+		echo '<div id="frage_'.$frage['id'].'" style="width:300px;height:200px;"></div>';
+	}
 }
 ?>
 </div>

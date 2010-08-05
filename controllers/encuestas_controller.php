@@ -1,7 +1,12 @@
 <?php
 class EncuestasController extends FrageAppController {
 	var $name = 'Encuestas';
-	var $helpers = array('Frage.functions');
+	var $helpers = array('Html', 'Form', 'Frage.functions');
+
+	function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow('view', 'resultados');
+	}
 
 	function index() {
 		$this->Encuesta->recursive = 1;
@@ -9,8 +14,9 @@ class EncuestasController extends FrageAppController {
 	}
 
 	function resultados($id = null) {
+		$id = $id ? $id : $this->params['id'];
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid fr encuesta', true));
+			$this->Session->setFlash(__('Invalid id', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->Encuesta->recursive = 2;
@@ -19,8 +25,14 @@ class EncuestasController extends FrageAppController {
 	}
 
 	function view($id = null) {
+		$u = $this->Auth->user();
+		if (!is_array($u)) {
+			$this->Session->setFlash('Debe estar logueado para completar encuestas.');
+			$this->redirect('/usuarios/login');
+		}
+		$id = $id ? $id : $this->params['id'];
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid fr encuesta', true));
+			$this->Session->setFlash(__('Invalid id', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->set('encuesta', $this->Encuesta->read(null, $id));
@@ -30,25 +42,25 @@ class EncuestasController extends FrageAppController {
 		if (!empty($this->data)) {
 			$this->Encuesta->create();
 			if ($this->Encuesta->save($this->data)) {
-				$this->Session->setFlash(__('The fr encuesta has been saved', true));
+				$this->Session->setFlash(__('The survey has been saved', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The fr encuesta could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The survey could not be saved. Please, try again.', true));
 			}
 		}
 	}
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid fr encuesta', true));
+			$this->Session->setFlash(__('Invalid id', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->Encuesta->save($this->data)) {
-				$this->Session->setFlash(__('The fr encuesta has been saved', true));
+				$this->Session->setFlash(__('The survey has been saved', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The fr encuesta could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The survey could not be saved. Please, try again.', true));
 			}
 		}
 		if (empty($this->data)) {
@@ -58,14 +70,14 @@ class EncuestasController extends FrageAppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for fr encuesta', true));
+			$this->Session->setFlash(__('Invalid id', true));
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->Encuesta->delete($id)) {
-			$this->Session->setFlash(__('Fr encuesta deleted', true));
+			$this->Session->setFlash(__('Survey deleted', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(__('Fr encuesta was not deleted', true));
+		$this->Session->setFlash(__('Survey was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
 }

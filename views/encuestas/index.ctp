@@ -1,9 +1,10 @@
 <div id="frage">
-<h2>Encuestas</h2>
+<h2>Administrar encuestas</h2>
 <ul>
 <?
 foreach ($encuestas as $e) {
-	echo '  <li><a href="/frage/encuestas/edit/'.$e['Encuesta']['id'].'">' . $e['Encuesta']['nombre'] . '</a> '
+	echo '  <li><a href="/frage/encuestas/view/'.$e['Encuesta']['id'].'">' . $e['Encuesta']['nombre'] . '</a>
+    <a href="/frage/encuestas/resultados/'.$e['Encuesta']['id'].'">[Resultados]</a>'
 	. $functions->abm($e['Encuesta']['id'], 'encuestas');
 	$functions->listar_preguntas($e['Pregunta']);
 	echo "</li>\n";
