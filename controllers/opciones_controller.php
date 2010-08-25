@@ -4,7 +4,12 @@ class OpcionesController extends FrageAppController {
 
 	function index() {
 		$this->Opcion->recursive = 0;
-		$this->set('opciones', $this->paginate());
+		$ops = $this->Opcion->find('all');
+		$opciones = array();
+		foreach ($ops as $k => $v) {
+			$opciones[$v['Opcion']['tipo']][] = $v;
+		}
+		$this->set(compact('opciones'));
 	}
 
 	function view($id = null) {

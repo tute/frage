@@ -26,8 +26,9 @@ h3. Installation
 );@
 
 h3. To do:
+* Agregar/editar preguntas desde una encuesta, via AJAX.
+* Permitir múltiples respuestas.
 * Administrar preguntas.
 * Siempre tiene que haber una respuesta seleccionada por default (o validar que
   usuario siempre seleccione alguna).
 * Sólo una vez por ip (y/o cookie)!
-* Poder agregar preguntas al agregar encuesta.

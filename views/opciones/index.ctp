@@ -1,9 +1,12 @@
-<ul>
-<?
-foreach ($opciones as $op) {
-	pr($op);
+<?php
+foreach ($opciones as $k => $ops) {
+	echo "<h3>Grupo $k:</h3>\n<p>";
+	$items = array();
+	foreach ($ops as $op) {
+		$items[] = $op['Opcion']['opcion'];
+	}
+	echo implode(', ', $items) . ".</p>\n";
 }
 ?>
-</ul>
 
 <p><a href="/frage/opciones/add">Nuevas opciones</a></p>
