@@ -46,6 +46,7 @@ CREATE TABLE `fr_preguntas` (
   `fr_encuesta_id` int(10) DEFAULT NULL,
   `pregunta` varchar(255) DEFAULT NULL,
   `tipo` int(10) DEFAULT NULL,
+  `multiple` tinyint(4) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -53,11 +54,12 @@ CREATE TABLE `fr_preguntas` (
 -- Dumping data for table `fr_preguntas`
 --
 
-INSERT INTO `fr_preguntas` (`id`, `fr_encuesta_id`, `pregunta`, `tipo`) VALUES
-(1, 1, 'Do you use CakePHP plugins?', 1),
-(2, 1, 'How much?', 2),
-(3, 1, 'Do you find them better than plain CakePHP? Why?', 3),
-(4, 2, 'Will you help me improving it?', 1);
+INSERT INTO `fr_preguntas` (`id`, `fr_encuesta_id`, `pregunta`, `tipo`, `multiple`) VALUES
+(1, 1, 'Do you use CakePHP plugins?', 1, 0),
+(2, 1, 'How much?', 2, 0),
+(3, 1, 'Do you find them better than plain CakePHP? Why?', 3, 0),
+(4, 2, 'Will you help me improving it?', 1, 0),
+(5, 1, 'Which Framework is better?', 2, 1);
 
 -- --------------------------------------------------------
 

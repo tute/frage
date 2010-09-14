@@ -11,7 +11,7 @@ foreach ($this->data['Pregunta'] as $k => $p) {
 	echo $form->input("Pregunta.$k.id");
 	echo $form->input("Pregunta.$k.pregunta");
 	echo $form->input("Pregunta.$k.tipo", array('type' => 'select', 'options' => $PREGUNTAS_TIPOS));
-	// echo $form->input("Pregunta.$k.multiple", array('type' => 'checkbox', 'label' => 'Múltiple'));
+	echo $form->input("Pregunta.$k.multiple", array('type' => 'checkbox', 'label' => 'Múltiple'));
 	echo '</fieldset>';
 }
 }

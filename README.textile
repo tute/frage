@@ -11,7 +11,7 @@ h3. It relies on:
 
 h3. Possible type of questions:
 # Yes or No
-# Values 1 to 5
+# Values 1 to 5 (unique or multiple)
 # Free text
 # Options defined by administrator (developing)
 
@@ -27,7 +27,6 @@ h3. Installation
 
 h3. To do:
 * Agregar/editar preguntas desde una encuesta, via AJAX.
-* Permitir múltiples respuestas.
 * Administrar preguntas.
 * Siempre tiene que haber una respuesta seleccionada por default (o validar que
   usuario siempre seleccione alguna).

@@ -20,7 +20,7 @@ class FunctionsHelper extends AppHelper {
 			echo "\n    <ul>\n";
 			foreach ($pregs as $p) {
 				echo '      <li>' . $p['pregunta']
-				 . $this->show_options($p['tipo'], $p['id'])
+				 . $this->show_options($p['tipo'], $p['id'], $p['multiple'])
 				 . "</li>\n";
 			}
 			echo '    </ul>';
@@ -43,20 +43,28 @@ class FunctionsHelper extends AppHelper {
 		}
 	}
 
-	function show_options($tipo, $pid) {
+	function show_options($tipo, $pid, $multiple) {
 		$options = ClassRegistry::init('Opcion')->find('all', array(
 			'conditions' => array('Opcion.tipo' => $tipo)
 		));
 		$opts = "<div>\n";
+		$k = 0;
 		foreach ($options as $opt) {
+			/* Options (multiple?) */
 			if ($tipo == 1 or $tipo == 2) {
-				$opts .= "<label><input type=\"hidden\" id=\"Encuesta{$pid}PreguntasVotoFrOpcionId\" name=\"data[$pid][PreguntasVoto][fr_opcion_id]\" value=\"{$opt['Opcion']['id']}\"></label> ";
-				$opts .= "<label><input type=\"radio\" id=\"Encuesta{$pid}PreguntasVotoValor\" name=\"data[$pid][PreguntasVoto][valor]\" value=\"{$opt['Opcion']['id']}\"> {$opt['Opcion']['opcion']}</label> ";
+				$opts .= "<input type=\"hidden\" id=\"Encuesta{$pid}PreguntasVotoFrOpcionId\" name=\"data[$pid][PreguntasVoto][fr_opcion_id]\" value=\"{$opt['Opcion']['id']}\"> ";
+				if ($multiple > 0) {
+					$opts .= "<label><input type=\"checkbox\" id=\"Encuesta{$pid}PreguntasVotoValor$k\" name=\"data[$pid][PreguntasVoto][valor][$k]\" value=\"{$opt['Opcion']['id']}\"> {$opt['Opcion']['opcion']}</label> ";
+				} else {
+					$opts .= "<label><input type=\"radio\" id=\"Encuesta{$pid}PreguntasVotoValor\" name=\"data[$pid][PreguntasVoto][valor]\" value=\"{$opt['Opcion']['id']}\"> {$opt['Opcion']['opcion']}</label> ";
+				}
 			}
+			/* Text field */
 			if ($tipo == 3)
 				$opts .= "<label><input type=\"text\" id=\"Encuesta{$pid}PreguntasVotoValor\" name=\"data[$pid][PreguntasVoto][valor]\"></label> ";
+			$k++;
 		}
-		$opts .= "<label><input type=\"hidden\" id=\"Encuesta{$pid}PreguntasVotoFrPreguntaId\" name=\"data[$pid][PreguntasVoto][fr_pregunta_id]\" value=\"$pid\"></label> ";
+		$opts .= "<input type=\"hidden\" id=\"Encuesta{$pid}PreguntasVotoFrPreguntaId\" name=\"data[$pid][PreguntasVoto][fr_pregunta_id]\" value=\"$pid\"> ";
 		return $opts . "</div>\n";
 	}
 
