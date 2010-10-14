@@ -49,14 +49,15 @@ class FunctionsHelper extends AppHelper {
 		));
 		$opts = "<div>\n";
 		$k = 0;
-		foreach ($options as $opt) {
+		foreach ($options as $i => $opt) {
 			/* Options (multiple?) */
 			if ($tipo == 1 or $tipo == 2) {
 				$opts .= "<input type=\"hidden\" id=\"Encuesta{$pid}PreguntasVotoFrOpcionId\" name=\"data[$pid][PreguntasVoto][fr_opcion_id]\" value=\"{$opt['Opcion']['id']}\"> ";
 				if ($multiple > 0) {
 					$opts .= "<label><input type=\"checkbox\" id=\"Encuesta{$pid}PreguntasVotoValor$k\" name=\"data[$pid][PreguntasVoto][valor][$k]\" value=\"{$opt['Opcion']['id']}\"> {$opt['Opcion']['opcion']}</label> ";
 				} else {
-					$opts .= "<label><input type=\"radio\" id=\"Encuesta{$pid}PreguntasVotoValor\" name=\"data[$pid][PreguntasVoto][valor]\" value=\"{$opt['Opcion']['id']}\"> {$opt['Opcion']['opcion']}</label> ";
+					$sel = ($i == 0 ? ' checked="checked"' : '');
+					$opts .= "<label><input type=\"radio\" id=\"Encuesta{$pid}PreguntasVotoValor\" name=\"data[$pid][PreguntasVoto][valor]\" value=\"{$opt['Opcion']['id']}\"$sel> {$opt['Opcion']['opcion']}</label> ";
 				}
 			}
 			/* Text field */

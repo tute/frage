@@ -2,18 +2,15 @@ h2. Survey plugin for CakePHP
 
 This plugin allows the creation of surveys, which can have one or many questions.
 
-I'm currently actively developing it.
-
 h3. It relies on:
 
 * Inflection ('opcion' => 'opciones') (@bootstrap.php@)
-* Authentication component, with 'Usuario' model name.
+* Authentication component (with 'Usuario' model name and corresponding ACO nodes).
 
 h3. Possible type of questions:
 # Yes or No
 # Values 1 to 5 (unique or multiple)
 # Free text
-# Options defined by administrator (developing)
 
 h3. Installation
 # Copy @frage@ folder to @/app/plugins/@
@@ -21,11 +18,11 @@ h3. Installation
 # Add routes to your routes.php file:
 @Router::connect(
 	'/survey/:id',
-	array('plugin' => 'frage', 'controller' => 'encuestas', 'action' => 'view'),
+	array('plugin' => 'frage', 'controller' => 'surveys', 'action' => 'view'),
 	array('id' => '[0-9]+')
 );@
 
-h3. To do:
-* Siempre tiene que haber una respuesta seleccionada por default (o validar que
-  usuario siempre seleccione alguna).
-* Sólo una vez por ip (y/o cookie)!
+h3. Enhancements:
+* One question-answer per user!
+* Pregunta CRUD operations are not needed anymore.
+

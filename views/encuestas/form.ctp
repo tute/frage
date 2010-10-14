@@ -17,7 +17,17 @@ function max_pregunta_id() {
 			ids.push( this.id.split('pregunta-')[1] );
 		return matched;
 	});
-	return max(ids);
+	if (max(ids) >= 0)
+		return parseInt(max(ids));
+	else
+		return -1;
+}
+
+function add_events() {
+	$('.delete-question').unbind('click').click(function(){
+		var fieldset = $(this).parent().parent().parent();
+		fieldset.fadeOut(function(){ fieldset.remove() });
+	});
 }
 
 $(function(){
@@ -25,15 +35,11 @@ $(function(){
 		var next_id = max_pregunta_id()+1;
 		/* Build next_id form */
 		$.get('/frage/encuestas/next_question/k:' + next_id, function(data) {
-			$('#EncuestaEditForm fieldset').first().append(data);
-			// FIXME: add_events to new question ($('.delete-question').click for now)
+			$('#EncuestaAddForm fieldset, #EncuestaEditForm fieldset').first().append(data);
+			add_events();
 		});
 	});
-
-	$('.delete-question').click(function(){
-		var fieldset = $(this).parent().parent().parent();
-		fieldset.fadeOut(function(){ fieldset.remove() });
-	});
+	add_events();
 });
 </script>
 
