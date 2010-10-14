@@ -4,7 +4,7 @@ class FrageAppController extends AppController {
 		parent::beforeFilter();
 		$this->set('PREGUNTAS_TIPOS', array(
 			1 => 'Sí o No',
-			2 => 'Valores (1 to 5)',
+			2 => 'Valores (1 a 5)',
 			3 => 'Texto libre'
 		));
 	}

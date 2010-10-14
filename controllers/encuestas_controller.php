@@ -82,5 +82,11 @@ class EncuestasController extends FrageAppController {
 		$this->Session->setFlash(__('Survey was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
+
+	function next_question() {
+		/* Called by JS to build new forms */
+		Configure::write('debug', 0);
+		$this->layout = false;
+	}
 }
 ?>
