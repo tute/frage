@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS `fr_encuestas`;
 CREATE TABLE `fr_encuestas` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) DEFAULT NULL,
+  `publicar` tinyint(4) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 

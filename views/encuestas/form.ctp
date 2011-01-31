@@ -50,10 +50,10 @@ $(function(){
 <?php
 echo $form->input('id');
 echo $form->input('nombre');
+echo $form->input('publicar', array('type' => 'checkbox'));
 if (isset($this->data['Pregunta']))
-foreach ($this->data['Pregunta'] as $k => $p) {
-	echo $this->element('pregunta', array('id' => $k));
-}
+	foreach ($this->data['Pregunta'] as $k => $p)
+		echo $this->element('pregunta', array('id' => $k));
 ?>
 </fieldset>
 <p><a href="#add-question" id="add-question">Agregar nueva pregunta</a>.</p>
