@@ -14,6 +14,15 @@ class PreguntasController extends FrageAppController {
 			$this->Session->setFlash('Debe estar logueado para completar encuestas.');
 			$this->redirect('/usuarios/login');
 		}
+
+		// No permite contestar encuestas sin publicar
+		$e = $this->Pregunta->Encuesta->findById($this->data['Encuesta']['id']);
+		if (!$e['Encuesta']['publicar']) {
+			$this->Session->setFlash('No puede contestar encuestas pasadas.');
+			$this->redirect('/encuestas');
+		}
+		unset($this->data['Encuesta']);
+
 		foreach ($this->data as $i => $v) {
 			/* Agregar info de usuario_id */
 			if (isset($this->data[$i]['PreguntasVoto']))

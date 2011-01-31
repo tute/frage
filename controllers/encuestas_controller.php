@@ -5,7 +5,7 @@ class EncuestasController extends FrageAppController {
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('view', 'resultados');
+		$this->Auth->allow('index', 'resultados', 'view');
 	}
 
 	function index() {
