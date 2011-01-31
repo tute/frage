@@ -3,8 +3,11 @@
 <?
 foreach ($encuestas as $e) {
 	echo '  <h3 style="margin-top:1em"><a href="/frage/encuestas/view/'.$e['Encuesta']['id'].'">' . $e['Encuesta']['nombre'] . '</a>
-    <a href="/frage/encuestas/resultados/'.$e['Encuesta']['id'].'">[Resultados]</a>'
-	. $functions->abm($e['Encuesta']['id'], 'encuestas');
+    <a href="/frage/encuestas/resultados/'.$e['Encuesta']['id'].'">[Resultados]</a>
+    <a href="/frage/encuestas/publicar/'.$e['Encuesta']['id'].'/do_it:';
+	// Publicar / Despublicar
+	echo ($e['Encuesta']['publicar'] ? '0">[Desp' : '1">[P') . 'ublicar]</a>';
+	echo $functions->abm($e['Encuesta']['id'], 'encuestas');
 	echo "</h3>\n";
 }
 ?>
