@@ -75,6 +75,7 @@ class EncuestasController extends FrageAppController {
 			$this->Session->setFlash(__('Invalid id', true));
 			$this->redirect(array('action' => 'index'));
 		}
+		$this->Encuesta->id = $id;
 		$this->Encuesta->saveField('publicar', $this->params['named']['do_it']);
 		$this->redirect(array('action' => 'index'));
 	}
