@@ -6,7 +6,8 @@ class Encuesta extends AppModel {
 	var $displayField = 'nombre';
 	var $hasMany = array(
 		'Pregunta' => array(
-			'className' => 'Frage.Pregunta'
+			'className' => 'Frage.Pregunta',
+			'dependent' => true
 		)
 	);
 }
