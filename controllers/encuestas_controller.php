@@ -41,7 +41,7 @@ class EncuestasController extends FrageAppController {
 	function add() {
 		if (!empty($this->data)) {
 			$this->Encuesta->create();
-			if ($this->Encuesta->save($this->data)) {
+			if ($this->Encuesta->saveAll($this->data)) {
 				$this->Session->setFlash(__('The survey has been saved', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
