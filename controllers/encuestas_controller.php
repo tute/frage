@@ -41,7 +41,7 @@ class EncuestasController extends FrageAppController {
 	function add() {
 		if (!empty($this->data)) {
 			$this->Encuesta->create();
-			if ($this->Encuesta->save($this->data)) {
+			if ($this->Encuesta->saveAll($this->data)) {
 				$this->Session->setFlash(__('The survey has been saved', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -75,6 +75,7 @@ class EncuestasController extends FrageAppController {
 			$this->Session->setFlash(__('Invalid id', true));
 			$this->redirect(array('action' => 'index'));
 		}
+		$this->Encuesta->id = $id;
 		$this->Encuesta->saveField('publicar', $this->params['named']['do_it']);
 		$this->redirect(array('action' => 'index'));
 	}
@@ -84,7 +85,7 @@ class EncuestasController extends FrageAppController {
 			$this->Session->setFlash(__('Invalid id', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		if ($this->Encuesta->delete($id)) {
+		if ($this->Encuesta->delete($id, true)) {
 			$this->Session->setFlash(__('Survey deleted', true));
 			$this->redirect(array('action'=>'index'));
 		}
