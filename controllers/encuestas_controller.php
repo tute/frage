@@ -84,7 +84,7 @@ class EncuestasController extends FrageAppController {
 			$this->Session->setFlash(__('Invalid id', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		if ($this->Encuesta->delete($id)) {
+		if ($this->Encuesta->delete($id, true)) {
 			$this->Session->setFlash(__('Survey deleted', true));
 			$this->redirect(array('action'=>'index'));
 		}
